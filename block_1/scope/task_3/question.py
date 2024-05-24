@@ -5,11 +5,16 @@ def print_msg(number):
 
     def printer():
         nonlocal number
-        number=3
-        print(number)
+        number=3 #3 меняется значение переменной number с 9 на 3
+        print(number) #4 Выводим значение 3. 
+            # т.к. выше был nonlocal, который говорит, что переменная number определена на область функции printer и ближайшую область видимости print_msg
 
-    printer()
-    print(number)
+    printer() #2
+    print(number) #5 Выводим значение 3, nonlocal позволяет объявлять переменную ближайшей области видимости
 
 
-print_msg(9)
+print_msg(9) #1
+
+# в терминале
+# 3
+# 3
