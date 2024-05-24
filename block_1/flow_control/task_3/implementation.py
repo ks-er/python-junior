@@ -13,7 +13,7 @@ def get_days_count_by_month(month):
 
     months = {
         'январь':31,
-        'февраль': getFebriaryDays(),
+        'февраль': getFebruaryDays(),
         'март':31,
         'апрель':30,
         'май':31,
@@ -31,7 +31,7 @@ def get_days_count_by_month(month):
     else:
         return 0
 
-def getFebriaryDays():
+def getFebruaryDays():
     year = datetime.now().year
     if year % 4 == 0: 
         return 29 
