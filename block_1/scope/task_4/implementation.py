@@ -14,6 +14,6 @@ def open_and_close_file(file_path):
     ###
     # Добавьте свой код сюда
     ###
-    absolute_path = os.getcwd() + "\\scope\\task_4\\" +file_path
+    absolute_path = os.getcwd() + "\\scope\\task_4\\" + file_path
     with open(absolute_path, 'r') as f:
         f.close()
