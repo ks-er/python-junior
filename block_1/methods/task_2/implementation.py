@@ -19,8 +19,6 @@ class ClassFather:
             return cls._name
         else:
             raise MyException
-   
-
 
 class User1(ClassFather):
     _name = 'User1'
