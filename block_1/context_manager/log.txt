@@ -1,0 +1,8 @@
+01
+03/22 08:51:01 INFO   :.main: *************** RSVP Agent started ***************
+02
+03/22 08:51:01 INFO   :...locate_configFile: Specified configuration file: /u/user10/rsvpd1.conf
+03/22 08:51:01 INFO   :.main: Using log level 511
+03/22 08:51:01 INFO   :..settcpimage: Get TCP images rc - EDC8112I Operation not supported on socket.
+03
+03/22 08:54:53 INFO   :.....terminator: process terminated with exit code 0
