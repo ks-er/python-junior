@@ -12,6 +12,6 @@ class File():
     def __exit__(self, exc_type, exc_value, exc_traceback):
         self.file.close()
 
-with File('I:/WORK/LEARN CENTER/Python/python-junior/block_1/context_manager/log.txt','r') as file:
+with File('log.txt','r') as file:
     print("close file")
     file.close()
