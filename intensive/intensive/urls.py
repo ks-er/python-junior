@@ -19,5 +19,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path("modelfields/", include("modelfields.urls")),
+    path("querysetmethods/", include("querysetmethods.urls")),
     path('admin/', admin.site.urls),
 ]
