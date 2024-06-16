@@ -331,7 +331,7 @@ class ProductModelTest(TestCase):
 
     @classmethod
     def test_april(cls):
-        res =None #get_top_customer_in_period(date(2021, 4, 1), date(2021, 4, 30))
+        res = get_top_customer_in_period(date(2021, 4, 1), date(2021, 4, 30))
         return {
             'elem': res,
             'itog': res == None
