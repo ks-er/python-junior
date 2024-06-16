@@ -70,3 +70,8 @@ class WorkerModelTest(TestCase):
         department = Department.objects.filter(name='Отдел №1').first()
         kol = department.get_all_worker_count
         return str(kol) + ":" + str(kol == 4)
+
+    @classmethod
+    def test_get_workers_info(cls):
+        list = Worker.objects.get_workers_info()
+        return list
