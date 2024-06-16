@@ -19,9 +19,17 @@ class WorkerManager(models.Manager):
         Строки упорядочены по фамилии и имени сотрудника.
         Каждая строка должна быть в формате вида: Васильев Василий, 888, Подразделение №1
         """
+        query = Worker.objects.all().select_related('department').order_by('first_name', 'last_name')
 
-        raise NotImplementedError
-
+        res_list = list()
+        for worker in query:
+            res_list.append(
+                list([
+                    " ".join([worker.first_name, worker.last_name]),
+                     worker.tab_num,
+                     worker.department.name])
+            )
+        return res_list
 
 class Department(models.Model):
     name = models.CharField('Наименование', max_length=30)
