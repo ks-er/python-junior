@@ -6,8 +6,12 @@
 
 <body>
 
-{% for item in items %}
-    <br> {{ item }}
+{% for item in listTask1 %}
+    {{ item }} <br>
+{% endfor %}
+
+{% for item in listTask2 %}
+     <br> {{ item.elem }} {{ item.itog }}
 {% endfor %}
 </body>
 </html>

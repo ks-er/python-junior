@@ -14,7 +14,7 @@ def index(request):
 
     return render(
             request,
-            'index.html',
+            'modelfields.html',
             context={
                 'res1': res1,
                 'res2': res2,

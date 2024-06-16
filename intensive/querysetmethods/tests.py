@@ -16,6 +16,8 @@ from querysetmethods.models import (
     Customer,
     Order,
     OrderItem,
+    get_order_count_by_customer,
+    get_top_customer_in_period,
 )
 
 
@@ -282,3 +284,55 @@ class ProductModelTest(TestCase):
                 count=8,
             ),
         ])
+
+    @classmethod
+    def test_oleg(cls):
+        kol = get_order_count_by_customer('Олег')
+        return str(kol) + ":" + str(kol == 2)
+
+    @classmethod
+    def test_ivan(cls):
+        kol = get_order_count_by_customer('Иван')
+        return str(kol) + ":" + str(kol == 3)
+
+    @classmethod
+    def test_egor(cls):
+        kol = get_order_count_by_customer('Егор')
+        return str(kol) + ":" + str(kol == 0)
+
+    @classmethod
+    def test_fedot(cls):
+        kol = get_order_count_by_customer('Федот')
+        return str(kol) + ":" + str(kol == 0)
+
+    @classmethod
+    def test_january(cls):
+        res = get_top_customer_in_period(date(2021, 1, 1), date(2021, 1, 31))
+        return {
+            'elem': res,
+            'itog': res == ('Иван', 2)
+        }
+
+    @classmethod
+    def test_febraury(cls):
+        res = get_top_customer_in_period(date(2021, 2, 1), date(2021, 2, 28))
+        return {
+            'elem': res,
+            'itog': res == ('Олег', 1)
+        }
+
+    @classmethod
+    def test_march(cls):
+        res = get_top_customer_in_period(date(2021, 3, 1), date(2021, 3, 31))
+        return {
+            'elem': res,
+            'itog': res == ('Павел', 1)
+        }
+
+    @classmethod
+    def test_april(cls):
+        res =None #get_top_customer_in_period(date(2021, 4, 1), date(2021, 4, 30))
+        return {
+            'elem': res,
+            'itog': res == None
+        }

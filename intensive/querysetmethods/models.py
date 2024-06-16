@@ -1,6 +1,7 @@
 from django.db import (
     models,
 )
+from django.db.models import Q, Count
 
 
 class Product(models.Model):
@@ -77,3 +78,78 @@ class OrderItem(models.Model):
     class Meta:
         db_table = 'order_item'
         app_label = 'admin'
+
+
+def get_order_count_by_customer(name):
+    """Возвращает количество заказов по имени покупателя
+
+    Args:
+        name: имя покупателя
+
+    Returns: число заказов (не может быть отрицательным, но может быть нулевым)
+    """
+    q_customer = Q(customer__name=name)
+    query = Order.objects.all().select_related('customer', 'customer__name').filter(q_customer)
+
+    return query.count()
+
+def get_top_customer_in_period(begin, end):
+    """Возвращает покупателя, который сделал наибольшее количество заказов за определенный промежуток времени
+
+    Args:
+        begin: начало периода
+        end: окончание периода
+
+    Returns: возвращает имя покупателя и количество его заказов за указанный период
+    """
+    q_start_date = Q(order__date_formation__gte=begin)
+    q_end_date = Q(order__date_formation__lte=end)
+
+    max_order = (Customer.objects.annotate(
+        period_orders=Count('order', filter=q_start_date & q_end_date)
+        ).order_by('-period_orders'))[:1]
+
+    res = max_order.values_list('name', 'period_orders')
+
+    if res[0][1] > 0:
+        return res[0]
+    else:
+        return None
+
+def get_top_order_by_sum_in_period(begin, end):
+    """Возвращает заказ, который имеют наибольшую сумму за определенный промежуток времени
+
+    Args:
+        begin: начало периода
+        end: окончание периода
+
+    Returns: возвращает номер заказа и его сумму
+    """
+    q_start_date = Q(date_formation__gte=begin)
+    q_end_date = Q(date_formation__lte=end)
+
+    query = Order.objects.all().filter(q_start_date & q_end_date)
+    raise NotImplementedError
+
+def get_top_product_by_total_count_in_period(begin, end):
+    """Возвращает товар, купленный в наибольшем объеме за определенный промежуток времени
+
+    Args:
+        begin: начало периода
+        end: окончание периода
+
+    Returns: возвращает наименование товара и объем
+    """
+    raise NotImplementedError
+
+def get_average_cost_without_product(product, begin, end):
+    """Возвращает среднюю стоимость заказов без указанного товара за определенный промежуток времени
+
+    Args:
+        product: наименование товара
+        begin: начало периода
+        end: окончание периода
+
+    Returns: возвращает числовое значение средней стоимости
+    """
+    raise NotImplementedError
