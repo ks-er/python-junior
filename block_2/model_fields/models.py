@@ -10,9 +10,7 @@ class WorkerManager(models.Manager):
         """
         Переопределенный кверисет с фильтрацией сотрудников с заданной датой принятия на работу и с не пустым табельным номером отличным от 0
         """
-
-        raise NotImplementedError
-
+        return super().get_queryset().filter(tab_num__gt=0,startwork_date__isnull=False)
 
     def get_workers_info(self):
         """
@@ -33,14 +31,18 @@ class Department(models.Model):
         """
         Количество активных сотрудников подразделения
         """
-        raise NotImplementedError
+        q_dep = Q(department=self.id)
+        query = Worker.objects.all().select_related('department')
+        return query.filter(q_dep).count()
 
     @property
     def get_all_worker_count(self):
         """
         Количество всех сотрудников подразделения
         """
-        raise NotImplementedError
+        q_dep = Q(department=self.id)
+        query = Worker.objects_all.all().select_related('department')
+        return query.filter(q_dep).count()
 
     class Meta:
         db_table = 'department'
