@@ -20,6 +20,7 @@ from querysetmethods.models import (
     get_top_customer_in_period,
     get_top_order_by_sum_in_period,
     get_top_product_by_total_count_in_period,
+    get_average_cost_without_product,
 )
 
 
@@ -399,4 +400,35 @@ class ProductModelTest(TestCase):
         return {
             'elem': res,
             'itog': res == []
+        }
+
+    @classmethod
+    def test_average_cost_january(cls):
+        res = get_average_cost_without_product('Молоко', date(2021, 1, 1), date(2021, 1, 31))
+        return {
+            'elem': res,
+            'itog': res == round(166.66667, 0) # 3 заказа на общую сумму 500
+        }
+    @classmethod
+    def test_average_cost_febraury(cls):
+        res = get_average_cost_without_product('Молоко', date(2021, 2, 1), date(2021, 2, 28))
+        return {
+            'elem': res,
+            'itog': res == 240 # 1 заказ на 240
+        }
+
+    @classmethod
+    def test_average_cost_march(cls):
+        res = get_average_cost_without_product('Молоко', date(2021, 3, 1), date(2021, 3, 31))
+        return {
+            'elem': res,
+            'itog': res == 480 # 1 заказ на 480
+        }
+
+    @classmethod
+    def test_average_cost_april(cls):
+        res = get_average_cost_without_product('Молоко', date(2021, 4, 1), date(2021, 4, 30))
+        return {
+            'elem': res,
+            'itog': res == 0
         }

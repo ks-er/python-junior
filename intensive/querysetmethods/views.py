@@ -33,6 +33,13 @@ def index(request):
         ProductModelTest.test_prod_april()
     ]
 
+    listTask5 = [
+        ProductModelTest.test_average_cost_january(),
+        ProductModelTest.test_average_cost_febraury(),
+        ProductModelTest.test_average_cost_march(),
+        ProductModelTest.test_average_cost_april()
+    ]
+
     return render(
             request,
             'querysetmethods.html',
@@ -41,5 +48,6 @@ def index(request):
                 'listTask2': listTask2,
                 'listTask3': listTask3,
                 'listTask4': listTask4,
+                'listTask5': listTask5,
             }
     )
