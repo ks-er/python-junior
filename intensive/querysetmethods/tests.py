@@ -18,6 +18,8 @@ from querysetmethods.models import (
     OrderItem,
     get_order_count_by_customer,
     get_top_customer_in_period,
+    get_top_order_by_sum_in_period,
+    get_top_product_by_total_count_in_period,
 )
 
 
@@ -335,4 +337,66 @@ class ProductModelTest(TestCase):
         return {
             'elem': res,
             'itog': res == None
+        }
+
+    @classmethod
+    def test_price_january(cls):
+        res = get_top_order_by_sum_in_period(date(2021, 1, 1), date(2021, 1, 31))
+        return {
+            'elem': res,
+            'itog': res == ('4', 630)
+        }
+
+    @classmethod
+    def test_price_febraury(cls):
+        res = get_top_order_by_sum_in_period(date(2021, 2, 1), date(2021, 2, 28))
+        return {
+            'elem': res,
+            'itog': res == ('6', 420)
+        }
+
+    @classmethod
+    def test_price_march(cls):
+        res = get_top_order_by_sum_in_period(date(2021, 3, 1), date(2021, 3, 31))
+        return {
+            'elem': res,
+            'itog': res == ('7', 480)
+        }
+    @classmethod
+    def test_price_april(cls):
+        res = get_top_order_by_sum_in_period(date(2021, 4, 1), date(2021, 4, 30))
+        return {
+            'elem': res,
+            'itog': res == None
+        }
+
+    @classmethod
+    def test_prod_january(cls):
+        res = get_top_product_by_total_count_in_period(date(2021, 1, 1), date(2021, 1, 31))
+        return {
+            'elem': res,
+            'itog': res ==  [('Молоко', 10)]
+        }
+
+    @classmethod
+    def test_prod_febraury(cls):
+        res = get_top_product_by_total_count_in_period(date(2021, 2, 1), date(2021, 2, 28))
+        return {
+            'elem': res,
+            'itog': res == [('Молоко', 4)]
+        }
+
+    @classmethod
+    def test_prod_march(cls):
+        res = get_top_product_by_total_count_in_period(date(2021, 3, 1), date(2021, 3, 31))
+        return {
+            'elem': res,
+            'itog': res == [('Молоко', 8)]
+        }
+    @classmethod
+    def test_prod_april(cls):
+        res = get_top_product_by_total_count_in_period(date(2021, 4, 1), date(2021, 4, 30))
+        return {
+            'elem': res,
+            'itog': res == []
         }

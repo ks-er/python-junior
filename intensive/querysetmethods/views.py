@@ -19,11 +19,27 @@ def index(request):
         ProductModelTest.test_april()
     ]
 
+    listTask3 = [
+        ProductModelTest.test_price_january(),
+        ProductModelTest.test_price_febraury(),
+        ProductModelTest.test_price_march(),
+        ProductModelTest.test_price_april()
+    ]
+
+    listTask4 = [
+        ProductModelTest.test_prod_january(),
+        ProductModelTest.test_prod_febraury(),
+        ProductModelTest.test_prod_march(),
+        ProductModelTest.test_prod_april()
+    ]
+
     return render(
             request,
             'querysetmethods.html',
             context={
                 'listTask1': listTask1,
                 'listTask2': listTask2,
+                'listTask3': listTask3,
+                'listTask4': listTask4,
             }
     )
