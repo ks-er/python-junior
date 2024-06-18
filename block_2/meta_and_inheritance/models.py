@@ -10,7 +10,8 @@ class WorkerManager(models.Manager):
         Переопределенный кверисет возвращающий всех сотрудников без директоров
         """
 
-        raise NotImplementedError
+        f_not_dir = Q(director__worker26_ptr_id__isnull=True)
+        return super().get_queryset().filter(f_not_dir)
 
 
 class EducationOffice(models.Model):
