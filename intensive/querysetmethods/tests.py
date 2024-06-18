@@ -407,14 +407,14 @@ class ProductModelTest(TestCase):
         res = get_average_cost_without_product('Молоко', date(2021, 1, 1), date(2021, 1, 31))
         return {
             'elem': res,
-            'itog': res == round(166.66667, 0) # 3 заказа на общую сумму 500
+            'itog': res == 630
         }
     @classmethod
     def test_average_cost_febraury(cls):
         res = get_average_cost_without_product('Молоко', date(2021, 2, 1), date(2021, 2, 28))
         return {
             'elem': res,
-            'itog': res == 240 # 1 заказ на 240
+            'itog': res == 420
         }
 
     @classmethod
@@ -422,7 +422,7 @@ class ProductModelTest(TestCase):
         res = get_average_cost_without_product('Молоко', date(2021, 3, 1), date(2021, 3, 31))
         return {
             'elem': res,
-            'itog': res == 480 # 1 заказ на 480
+            'itog': res == 0
         }
 
     @classmethod

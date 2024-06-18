@@ -1,7 +1,7 @@
 from django.db import (
     models,
 )
-from django.db.models import Q, F, Count, Sum, OuterRef, Subquery, Max, Value, Case, When
+from django.db.models import Q, F, Count, Sum, OuterRef, Subquery, Max, Case, When
 
 
 class Product(models.Model):
@@ -220,7 +220,16 @@ def get_average_cost_without_product(product, begin, end):
     f_end_date = Q(order__date_formation__lte=end)
     f_product = Q(product__name=product)
 
-    order_item_query = OrderItem.objects.filter(f_start_date & f_end_date & f_product)
+    order_item_product_query = (OrderItem.objects.filter(f_start_date & f_end_date & f_product)
+                                .values('order_id').distinct())
+
+    order_id_list = list()
+    for row in order_item_product_query:
+        order_id_list.append(
+            row['order_id']
+        )
+
+    order_item_query = OrderItem.objects.filter(f_start_date & f_end_date).exclude(order_id__in=order_id_list)
 
     f1 = Q(begin__lte=OuterRef("order__date_formation"))
     f2 = Q(end__gte=OuterRef("order__date_formation"))
