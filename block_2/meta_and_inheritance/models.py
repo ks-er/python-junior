@@ -13,24 +13,31 @@ class WorkerManager(models.Manager):
         return super().get_queryset().filter(f_not_dir)
 
 
-class EducationOffice(models.Model):
+class CommonOffice(models.Model):
+    """
+    Офис
+    """
+    address = models.TextField('Адрес')
+    mail = models.CharField('Адрес почты', max_length=30)
+
+    class Meta:
+        abstract = True
+
+
+class EducationOffice(CommonOffice):
     """
     Учебный офис
     """
-    address = models.TextField('Адрес')
-    mail = models.CharField('Адрес почты', max_length=30,)
     is_active = models.BooleanField(default=True)
 
     class Meta:
         db_table = 'education_office'
 
 
-class GeneralOffice(models.Model):
+class GeneralOffice(CommonOffice):
     """
     Головной офис
     """
-    address = models.TextField('Адрес')
-    mail = models.CharField('Адрес почты', max_length=30)
     name = models.TextField('Название головного офиса ')
 
     class Meta:
@@ -93,7 +100,6 @@ class OrderedWorker(Worker):
 
     class Meta:
         proxy = True
-        app_label = 'admin'
         ordering = ('first_name', 'startwork_date')
 
 
