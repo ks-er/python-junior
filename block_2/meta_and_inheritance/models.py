@@ -9,7 +9,6 @@ class WorkerManager(models.Manager):
         """
         Переопределенный кверисет возвращающий всех сотрудников без директоров
         """
-
         f_not_dir = Q(director__worker26_ptr_id__isnull=True)
         return super().get_queryset().filter(f_not_dir)
 
@@ -81,15 +80,21 @@ class Worker(Person):
 
 
 class OrderedWorker(Worker):
-    """
+   """
     Модель с  сотрудниками упорядоченными по фамилии и дате приема на работу
     """
+
     @property
     def startwork_year(self):
         """
         Получить значение года приема на работу
         """
-        raise NotImplementedError
+        return self.startwork_date.year
+
+    class Meta:
+        proxy = True
+        app_label = 'admin'
+        ordering = ('first_name', 'startwork_date')
 
 
 class Director(Worker):
