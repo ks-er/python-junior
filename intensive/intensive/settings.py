@@ -56,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "modelfields", "querysetmethods"
+            BASE_DIR / "modelfields", "querysetmethods", "metaandinheritance", "middlewares"
         ],
         'APP_DIRS': True,
         'OPTIONS': {

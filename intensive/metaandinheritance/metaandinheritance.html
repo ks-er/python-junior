@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% block title %}<title>Test metaandinheritance</title>{% endblock %}
+</head>
+
+<body>
+
+{% for item in listTask %}
+    {{ item.elem }} {{ item.itog }} <br>
+{% endfor %}
+
+{% for row in listTask4 %}
+    {% for kvp in row %}
+    {{ kvp.elem }} {{ kvp.itog }} <br>
+    {% endfor %}
+{% endfor %}
+
+</body>
+</html>
