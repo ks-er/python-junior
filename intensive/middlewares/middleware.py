@@ -54,5 +54,4 @@ class CheckErrorMiddleware(FormatterMiddleware):
         "Ошибка: {exception}"
     """
     def process_exception(self, request, exception):
-        print('была ошибка')
         return HttpResponse(f"Ошибка: {exception}")

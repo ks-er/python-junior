@@ -11,7 +11,7 @@ def index(request):
         MiddlewareTestCase.test_CheckErrorMiddleware(),
         MiddlewareTestCase.test_default_CheckErrorMiddleware()
     ]
-    print(request.path_info)
+
     return render(
             request,
             'middlewares.html',
@@ -30,7 +30,6 @@ def calc(request):
 
         Результат:  JsonResponse вида {'3*3': 9, '10-2': 8, '10/5': 2}
         """
-    print(request.method)
     if request.method == 'GET':
 
         maths = request.GET.get('maths', "")
@@ -39,8 +38,6 @@ def calc(request):
         if (len(maths) == 0):
             return JsonResponse({})
 
-        print(maths)
-        print(delimiter)
         list = Calculator.calculate(maths, delimiter)
         return JsonResponse(list)
     else:
