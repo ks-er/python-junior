@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-  {% block title %}<title>Test metaandinheritance</title>{% endblock %}
+  {% block title %}<title>Test middlewares</title>{% endblock %}
 </head>
 
 <body>
 
-{% for item in listTask1 %}
-    {{ item }} <br>
+{% for item in maths %}
+    {{ item.maths }} {{ item.itog }} <br>
 {% endfor %}
 </body>
 </html>
